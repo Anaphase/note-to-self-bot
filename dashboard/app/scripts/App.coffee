@@ -86,11 +86,12 @@ angular.module('App', [
 .run([
   
   'App'
+  '$document'
   '$rootScope'
   
-  (App, $rootScope) ->
+  (App, $document, $rootScope) ->
     
-    document.title = App.name
+    $document[0].title = App.name
     
     $rootScope.App = App
   
