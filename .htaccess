@@ -1,0 +1,10 @@
+# redirect requests on this directory to the dashboard's public folder
+RewriteEngine on
+RewriteCond %{REQUEST_URI} !/dashboard/public
+RewriteRule ^(.*) dashboard/public/$0
+
+# uncomment this for dashboard password protection
+# AuthType Basic
+# AuthName "Authorized Access Only"
+# AuthUserFile /absolute/path/to/.htpasswd
+# Require valid-user
