@@ -1,0 +1,42 @@
+div
+  div.modal-header
+    h3
+      span 'Edit Response '
+      small @bind(comment.id)
+  
+  div.modal-body
+    blockquote
+      p[highlight=comment.note_to_self][highlight-after='note to self']
+        @bind(comment.body)
+      
+      footer
+        a[target='_blank']
+          @bind(comment.author)
+          @href('http://reddit.com/u/{{comment.author}}')
+        span ' on '
+        a[target='_blank']
+          @bind(comment.link_title)
+          @href('{{comment.permalink}}')
+        span ' in '
+        a[target='_blank']
+          @href('http://reddit.com/r/{{comment.subreddit}}')
+          
+          span '/r/'
+          span @bind(comment.subreddit)
+    
+    form
+      @submit(save())
+      textarea.edit-response-textarea.form-control @model(comment.note_to_self)
+  
+  div.modal-footer.clearfix
+    button.btn.btn-danger.pull-left
+      @click(delete(comment))
+      'Delete'
+    
+    button.btn.btn-success
+      @click(save(comment))
+      'Save'
+    
+    button.btn.btn-default
+      @click(cancel())
+      'Cancel'

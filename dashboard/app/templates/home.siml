@@ -1,0 +1,23 @@
+div.container
+  
+  header
+    h1 @bind(App.name)
+  
+  section
+    table.table.table-hover
+      thead
+        tr
+          th 'Note'
+          th 'Time'
+      tbody
+        tr
+          @class("{'flagged': comment.author === 'totally_not_a_bot'}")
+          @click(editComment(comment))
+          @repeat(comment in comments)
+          
+          td @bind(comment.note_to_self)
+          
+          td
+            countdown[end='{{comment.created_utc}}']
+  
+footer @include('"partials/footer"')

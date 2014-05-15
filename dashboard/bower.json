@@ -1,0 +1,33 @@
+{
+  "name": "cinnamon-toast-brunch",
+  "version": "1.0.0",
+  "main": "public/js/app.js",
+  "dependencies": {
+    
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-animate": "latest",
+    "angular-resource": "latest",
+    "angular-sanitize": "latest",
+    
+    "json3": "latest",
+    "strapless": "latest",
+    "angular-growl-v2": "latest",
+    "angular-bootstrap": "latest",
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#latest"
+  },
+  "overrides": {
+    "json3": {
+      "main": "lib/json3.js"
+    },
+    "strapless": {
+      "main": "less/bootstrap.less"
+    },
+    "angular-hotkeys": {
+      "main": ["src/hotkeys.js", "src/hotkeys.css"]
+    },
+    "mousetrap": {
+      "main": "mousetrap.js"
+    }
+  }
+}

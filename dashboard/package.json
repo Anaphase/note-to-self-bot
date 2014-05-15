@@ -1,0 +1,26 @@
+{
+  "name": "note-to-self-bot-dashboard",
+  "version": "1.0.0",
+  "description": "A web front-end that provides a front-end application for easy comment monitoring and manipulation for note-to-self-bot",
+  "dependencies": {
+    "bower": "latest",
+    "brunch": "latest",
+    "auto-reload-brunch": "latest",
+    
+    "css-brunch": "latest",
+    "less-brunch": "latest",
+    "stylus-brunch": "latest",
+    "clean-css-brunch": "latest",
+    
+    "uglify-js-brunch": "latest",
+    "javascript-brunch": "latest",
+    "coffee-script-brunch": "latest",
+    
+    "siml-angular-brunch": "latest"
+  },
+  "author": {
+    "name": "Colin Wood",
+    "email": "colinjameswood@gmail.com"
+  },
+  "license": "MIT"
+}
