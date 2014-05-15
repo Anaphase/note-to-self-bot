@@ -48,22 +48,24 @@ angular.module('App', [
         resolve:
           Comment: [
             
+            'App'
             '$resource'
             
-            ($resource) ->
-              $resource 'http://localhost:8080/comments/:id', id: '@id'
+            (App, $resource) ->
+              $resource "#{App.addresses.api}/comments/:id", id: '@id'
              
           ]
           comments: [
             
             '$q'
+            'App'
             '$resource'
             
-            ($q, $resource) ->
+            ($q, App, $resource) ->
               
               deferred = $q.defer()
               
-              Comment = $resource 'http://localhost:8080/comments/:id', id: '@id'
+              Comment = $resource "#{App.addresses.api}/comments/:id", id: '@id'
               
               comments = Comment.query.apply Comment, [
                 ->
