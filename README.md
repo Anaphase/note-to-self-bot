@@ -11,7 +11,10 @@ The bot uses [reddit-stream](https://github.com/anaphase/reddit-stream) to scan 
 `ntsb-api.coffee` provides a REST-ful API for CRUD operations against the comment database.
 
 ## Dashboard
-`dashboard/` is a [Brunch](http://brunch.io/) project that provides a front-end web application for easy comment monitoring and manipulation (via the API.)
+`dashboard/` contains a [Brunch](http://brunch.io/) project that provides a front-end web application for easy comment monitoring and manipulation (via the API.) Here are some screenshots:
+
+![NTSB Dashboard Screenshot- Comment List](http://i.imgur.com/lFTNLZB.png)
+![NTSB Dashboard Screenshot - Edit Comment Modal](http://i.imgur.com/xTxE0Uh.png)
 
 ## Usage
 To run the bot, you'll need to install [Brunch](http://brunch.io/), [Bower](http://bower.io/), and [MongoDB](https://www.mongodb.org/). Then follow these steps:
