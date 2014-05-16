@@ -1,4 +1,4 @@
-# use express to serve a RESTful API form CRUD operations against comments
+# use express to serve a REST-ful API for CRUD operations against comments
 bodyParser = require 'body-parser'
 mongoose = require 'mongoose'
 express = require 'express'
