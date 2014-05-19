@@ -27,6 +27,11 @@ div
     form
       @submit(save())
       textarea.edit-response-textarea.form-control @model(comment.note_to_self)
+      div.checkbox
+        label
+          input:checkbox
+            @model(comment.add_message)
+          'Prepend greeting message'
   
   div.modal-footer.clearfix
     button.btn.btn-danger.pull-left

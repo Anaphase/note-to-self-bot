@@ -86,7 +86,8 @@ angular.module('App.controllers', [])
             
             $scope.save = ->
               
-              comments[current_id].note_to_self = $scope.comment.note_to_self
+              for key, value of $scope.comment
+                comments[current_id][key] = value
               
               comments[current_id].$save.apply comments[current_id], [
                 ->

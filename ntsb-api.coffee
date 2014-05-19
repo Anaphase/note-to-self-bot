@@ -71,6 +71,7 @@ db.once 'open', ->
         
         comment = comments[0]
         
+        comment.add_message = request.body.add_message
         comment.note_to_self = request.body.note_to_self
         
         comment.save (error) ->
