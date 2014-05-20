@@ -93,8 +93,8 @@ db.once 'open', ->
     
     for comment in comments
       
-      continue if comment.data.author in user_blacklist
-      continue if comment.data.subreddit in subreddit_blacklist
+      continue if comment.data.author.toLowerCase() in user_blacklist
+      continue if comment.data.subreddit.toLowerCase() in subreddit_blacklist
       
       if (/note to self/gi).test comment.data.body
         do (comment) ->
