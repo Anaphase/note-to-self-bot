@@ -23,7 +23,7 @@ Bot = require './lib/Bot'
 bot = new Bot 'comments', 'all', 'note-to-self-bot by /u/Anaphase'
 
 user_blacklist = ['note-to-self-bot']
-subreddit_blacklist = ['fatpeoplehate', 'askwomen']
+subreddit_blacklist = ['fatpeoplehate', 'askwomen', 'askreddit']
 
 db.once 'open', ->
   
