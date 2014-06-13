@@ -22,8 +22,8 @@ Comment = require './lib/schemas/Comment'
 Bot = require './lib/Bot'
 bot = new Bot 'comments', 'all', 'note-to-self-bot by /u/Anaphase'
 
-user_blacklist = ['note-to-self-bot']
-subreddit_blacklist = ['fatpeoplehate', 'askwomen', 'askreddit']
+user_blacklist = ['note-to-self-bot', 'bagelhunt']
+subreddit_blacklist = ['fatpeoplehate', 'askwomen', 'askreddit', 'actuallesbians']
 
 db.once 'open', ->
   
