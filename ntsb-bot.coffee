@@ -47,7 +47,7 @@ db.once 'open', ->
             if comment.add_message
               message = switch Math.floor(Math.random() * 5) + 1
                 when 1 then 'Hey friend! I thought I\'d remind you:'
-                when 2 then 'You should always rememeber:'
+                when 2 then 'You should always remember:'
                 when 3 then 'Just in case you forgot:'
                 when 4 then 'A friendly reminder:'
                 when 5 then 'Don\'t forget:'
