@@ -58,25 +58,25 @@ db.once 'open', ->
             
             bot.reply comment.name, message
               .then(
-                  ->
-                    console.log 'commented on', (new Date())
-                    console.log comment.permalink
-                    console.log message
-                    console.log ''
-                    
-                    comment.reminded = yes
-                    comment.save (error) ->
-                      console.error 'could not update comment:', error if error?
-                      io.sockets.emit 'reminded', comment
-                      # push.send
-                      #   timestamp: Math.round((new Date()).getTime()/1000)
-                      #   title: 'NTSB Replied'
-                      #   url_title: 'view on reddit'
-                      #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
-                      #   url: comment.permalink
-                ,
-                  (error) ->
-                    console.error 'could not reply to comment:', error
+                ->
+                  console.log 'commented on', (new Date())
+                  console.log comment.permalink
+                  console.log message
+                  console.log ''
+                  
+                  comment.reminded = yes
+                  comment.save (error) ->
+                    console.error 'could not update comment:', error if error?
+                    io.sockets.emit 'reminded', comment
+                    # push.send
+                    #   timestamp: Math.round((new Date()).getTime()/1000)
+                    #   title: 'NTSB Replied'
+                    #   url_title: 'view on reddit'
+                    #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
+                    #   url: comment.permalink
+              ,
+                (error) ->
+                  console.error 'could not reply to comment:', error
               )
   
   bot.login(auth.reddit.username, auth.reddit.password).then(
