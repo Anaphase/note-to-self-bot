@@ -6,6 +6,7 @@ module.exports = mongoose.model 'Comment',
   name: String
   author: String
   link_url: String
+  body_html: String
   subreddit: String
   permalink: String
   link_title: String

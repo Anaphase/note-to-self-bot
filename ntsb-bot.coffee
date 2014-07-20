@@ -127,6 +127,7 @@ db.once 'open', ->
                 author: comment.data.author
                 link_url: comment.data.link_url
                 subreddit: comment.data.subreddit
+                body_html: comment.data.body_html
                 link_title: comment.data.link_title
                 link_author: comment.data.link_author
                 created_utc: comment.data.created_utc
