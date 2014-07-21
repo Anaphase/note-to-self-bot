@@ -10,7 +10,7 @@ class Bot extends RedditStream
     
     deferred = q.defer()
     
-    request = reddit.read(comment.data.link_id)
+    request = reddit.read(link_id)
     
     request.end (error, response) ->
       deferred.reject error if error?
