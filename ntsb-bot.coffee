@@ -98,7 +98,7 @@ db.once 'open', ->
       
       if (/note to self/gi).test comment.data.body
         do (comment) ->
-          bot.getPermalink(comment).then (permalink) ->
+          bot.getLink(comment.data.link_id).then (link) ->
             
             matches = comment.data.body.trim().match(/note to self\s*[:|\-|,|;\.]*\s*([^.!?\n]+[.!?]*)/i)
             
@@ -120,17 +120,18 @@ db.once 'open', ->
               
               comment = new Comment
                 id: comment.data.id
-                permalink: permalink
                 name: comment.data.name
                 body: comment.data.body
                 note_to_self: note_to_self
                 author: comment.data.author
+                thumbnail: link.data.thumbnail
                 link_url: comment.data.link_url
                 subreddit: comment.data.subreddit
                 body_html: comment.data.body_html
                 link_title: comment.data.link_title
                 link_author: comment.data.link_author
                 created_utc: comment.data.created_utc
+                permalink: "http://reddit.com#{link.data.permalink}#{comment.data.id}/?context=3"
               
               comment.save (error, comment) ->
                 return console.error 'could not save comment:', error if error?
