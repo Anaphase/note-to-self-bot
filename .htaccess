@@ -1,6 +1,7 @@
 # redirect requests on this directory to the dashboard's public folder
 RewriteEngine on
 RewriteCond %{REQUEST_URI} !/dashboard/public
+RewriteCond %{REQUEST_URI} !/logs
 RewriteRule ^(.*) dashboard/public/$0
 
 # uncomment this for dashboard password protection
