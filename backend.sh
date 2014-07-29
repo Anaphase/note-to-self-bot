@@ -34,6 +34,11 @@ then
   touch "logs/$2/$now/out.log"
   touch "logs/$2/$now/error.log"
   
+  cd "logs/$2"
+  rm -f "current"
+  ln -s "$now" "current"
+  cd "../.."
+  
   forever start --minUptime 1000 --spinSleepTime 1000 -v -l "ntsb-$2.log" -o "logs/$2/$now/out.log" -e "logs/$2/$now/error.log" -c coffee "ntsb-$2.coffee"
   
 fi
