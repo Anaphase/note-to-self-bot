@@ -9,7 +9,7 @@ angular.module('App.services')
   (App, growl, $rootScope) ->
     
     unless io?
-      growl.addErrorMessage 'could not load socket.io'
+      growl.error 'could not load socket.io'
     else
       socket = io.connect App.addresses.socket_io
     
