@@ -4,25 +4,25 @@
   "main": "public/js/app.js",
   "dependencies": {
     
-    "angular": "latest",
-    "angular-route": "latest",
-    "angular-animate": "latest",
-    "angular-resource": "latest",
-    "angular-sanitize": "latest",
+    "angular": "1.2.21",
+    "angular-route": "1.2.21",
+    "angular-animate": "1.2.21",
+    "angular-resource": "1.2.21",
+    "angular-sanitize": "1.2.21",
     
-    "json3": "latest",
+    "json3": "3.3.2",
     "strapless": "latest",
-    "angular-growl-v2": "latest",
-    "socket.io-client": "latest",
-    "angular-bootstrap": "latest",
-    "angular-hotkeys": "chieffancypants/angular-hotkeys#latest"
+    "angular-growl-v2": "0.6.1",
+    "socket.io-client": "1.0.6",
+    "angular-bootstrap": "0.11.0",
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#1.4.1"
   },
   "overrides": {
     "json3": {
       "main": "lib/json3.js"
     },
     "socket.io-client": {
-      "main": "dist/socket.io.js"
+      "main": "socket.io.js"
     },
     "strapless": {
       "main": "less/bootstrap.less"
