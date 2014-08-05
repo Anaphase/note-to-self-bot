@@ -19,11 +19,11 @@ db.on 'error', console.error.bind(console, 'connection error:')
 # load mongoose schemas
 Comment = require './lib/schemas/Comment'
 
+# load users and subreddits to skip
+blacklist = require './lib/blacklist'
+
 Bot = require './lib/Bot'
 bot = new Bot 'comments', 'all', 'note-to-self-bot by /u/Anaphase'
-
-user_blacklist = ['note-to-self-bot', 'bagelhunt']
-subreddit_blacklist = ['fatpeoplehate', 'askwomen', 'askreddit', 'percyjacksonrp', 'actuallesbians', 'futurology', 'redpillwomen', 'guns', 'pcgaming', 'okbestface', 'tattoos']
 
 db.once 'open', ->
   
@@ -93,8 +93,8 @@ db.once 'open', ->
     
     for comment in comments
       
-      continue if comment.data.author.toLowerCase() in user_blacklist
-      continue if comment.data.subreddit.toLowerCase() in subreddit_blacklist
+      continue if comment.data.author.toLowerCase() in blacklist.users
+      continue if comment.data.subreddit.toLowerCase() in blacklist.subreddits
       
       if (/note to self/gi).test comment.data.body
         do (comment) ->
