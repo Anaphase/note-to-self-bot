@@ -11,9 +11,7 @@ Pushover = require 'pushover-notifications'
 push = new Pushover(user: auth.pushover.user, token: auth.pushover.token)
 
 # use socket.io to send notifications to web front-end
-io = require('socket.io').listen(7070, 'log level': 1)
-io.enable 'browser client minification'
-io.enable 'browser client gzip'
+io = require('socket.io').listen(7070)
 
 # use mongoose to interface with MongoDB
 mongoose = require 'mongoose'
