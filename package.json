@@ -9,12 +9,11 @@
   },
   "dependencies": {
     "q": "1.0.1",
+    "raw.js": "0.2.1",
     "express": "4.1.1",
     "mongoose": "3.8.8",
-    "rereddit": "1.0.0",
     "socket.io": "0.9.16",
     "body-parser": "1.0.2",
-    "reddit-stream": "latest",
     "pushover-notifications": "0.1.8"
   },
   "devDependencies": {

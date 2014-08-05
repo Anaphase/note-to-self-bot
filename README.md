@@ -2,7 +2,7 @@
 
 NTSB is a reddit bot that scans comments for 'note to self' and replies with a reminder one day later.
 
-The bot uses [reddit-stream](https://github.com/anaphase/reddit-stream) to scan comments and [MongoDB](https://www.mongodb.org/) to save them locally. The bot uses [socket.io](http://socket.io/) to communicate with the frontend dashboard and [Pushover](https://pushover.net/) to notify your phone when it picks up a comment. NTSB runs forever using [Forever](https://github.com/nodejitsu/forever).
+The bot uses [raw.js](https://bitbucket.org/Doctor_McKay/raw.js) to scan comments and [MongoDB](https://www.mongodb.org/) to save them locally. The bot uses [socket.io](http://socket.io/) to communicate with the frontend dashboard and [Pushover](https://pushover.net/) to notify your phone when it picks up a comment. NTSB runs forever using [Forever](https://github.com/nodejitsu/forever).
 
 ## Bot
 `ntsb-bot.coffee` performs the scanning and database operations.
@@ -49,10 +49,16 @@ To run the bot, you'll need to install [Brunch](http://brunch.io/), [Bower](http
     reddit:
       username: 'your-bot-name'
       password: 'your-password'
+      app:
+        id: 'reddit-app-id'
+        secret: 'reddit-app-secret'
     pushover:
       user: 'pushover-user'
       token: 'pushover-token'
   ```
+  
+  If you do not have a reddit app created, visit [this page](https://ssl.reddit.com/prefs/apps/) and create a new "script" application to obtain an app id & secret. Put whatever you want in "redirect uri" as it will not be used.
+
 
 4. Install NPM & Bower packages for the frontend:
   ```bash
