@@ -15,4 +15,6 @@ module.exports =
     'pcgaming'
     'okbestface'
     'tattoos'
+    'polandball'
+    'talesfromtechsupport'
   ]
