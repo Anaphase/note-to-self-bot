@@ -37,7 +37,10 @@ db.once 'open', ->
       .sort 'created_utc'
       .exec (error, comments) ->
         
-        return console.error 'could not read comments from database:', error if error?
+        if error?
+          console.error 'error on', (new Date())
+          console.error 'could not read comments from database:', error
+          return
         
         return if comments?.length is 0
         
@@ -58,7 +61,49 @@ db.once 'open', ->
             
             reddit.comment comment.name, message, (error) ->
               if error?
-                console.error 'could not reply to comment:', error
+                console.error 'error on', (new Date())
+                console.error "could not reply to comment #{comment.id}:", error
+                
+                if error is '403: Forbidden'
+                  console.error 'detected possible newly blacklisted subreddit:', comment.subreddit
+                  push.send
+                    timestamp: Math.round((new Date()).getTime() / 1000)
+                    message: "detected possible newly blacklisted subreddit: #{comment.subreddit}\n\nhttp://ps.tl/ntsb/"
+                    url_title: 'view on reddit'
+                    url: comment.permalink
+                    title: 'NTSB Alert'
+                else if typeof error is 'object'
+                  switch error[0]
+                    when 'DELETED_COMMENT'
+                      console.error "detected deleted comment #{comment.id}:", comment.permalink
+                      push.send
+                        timestamp: Math.round((new Date()).getTime() / 1000)
+                        message: "detected deleted comment #{comment.id}: #{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
+                        url_title: 'view on reddit'
+                        url: comment.permalink
+                        title: 'NTSB Alert'
+                else
+                  return
+                
+                console.log 'removed on', (new Date())
+                console.log comment.permalink
+                console.log message
+                console.log ''
+                
+                comment.reminded = yes
+                comment.save (error) ->
+                  if error?
+                    console.error 'error on', (new Date())
+                    console.error "could not update comment #{comment.id}:", error
+                  else
+                    io.sockets.emit 'removed', comment
+                    # push.send
+                    #   timestamp: Math.round((new Date()).getTime() / 1000)
+                    #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
+                    #   url_title: 'view on reddit'
+                    #   url: comment.permalink
+                    #   title: 'NTSB Removed'
+                
               else
                 console.log 'commented on', (new Date())
                 console.log comment.permalink
@@ -68,11 +113,12 @@ db.once 'open', ->
                 comment.reminded = yes
                 comment.save (error) ->
                   if error?
-                    console.error 'could not update comment:', error
+                    console.error 'error on', (new Date())
+                    console.error "could not update comment #{comment.id}:", error
                   else
                     io.sockets.emit 'reminded', comment
                     # push.send
-                    #   timestamp: Math.round((new Date()).getTime()/1000)
+                    #   timestamp: Math.round((new Date()).getTime() / 1000)
                     #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
                     #   url_title: 'view on reddit'
                     #   url: comment.permalink
@@ -81,12 +127,17 @@ db.once 'open', ->
   reddit.setupOAuth2 auth.reddit.app.id, auth.reddit.app.secret
   reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->
     if error?
+      console.error 'error on', (new Date())
       console.error 'could not log in:', error
     else
       console.log 'logged in!'
       remind()
       stream.start()
       setInterval remind, 60 * 1000
+  
+  stream.on 'error', (error) ->
+    console.error 'error on', (new Date())
+    console.error 'error retrieving comments', error
   
   stream.on 'comment', (comment) ->
     
@@ -98,7 +149,8 @@ db.once 'open', ->
       reddit.comments { link: comment.link_id[3..] }, (error, link) ->
         
         if error?
-          console.error 'could get link info:', error
+          console.error 'error on', (new Date())
+          console.error "could get link info for comment #{comment.id}:", error
         else
           
           link = link.data.children[0].data
@@ -138,7 +190,8 @@ db.once 'open', ->
             
             comment.save (error, comment) ->
               if error?
-                console.error 'could not save comment:', error
+                console.error 'error on', (new Date())
+                console.error "could not save comment #{comment.id}:", error
               else
                 console.log 'found on', (new Date())
                 console.log comment.permalink

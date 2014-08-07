@@ -150,5 +150,15 @@ angular.module('App.controllers')
       full_note = $filter('removeQuotes')(old_comment.note_to_self)
       
       growl.warning "replied to #{old_comment.id}<hr><a href='#{old_comment.permalink}' title='#{full_note}' target='_blank'>#{note}</a><hr>#{timestamp}", ttl: -1
+    
+    socket.on 'removed', (old_comment) ->
+      removeComment getCommentIndex old_comment
+      
+      note = old_comment.note_to_self
+      note = note[...50] + '...' if note.length > 50
+      timestamp = new Date().toLocaleString()
+      full_note = $filter('removeQuotes')(old_comment.note_to_self)
+      
+      growl.error "removed #{old_comment.id}<hr><a href='#{old_comment.permalink}' title='#{full_note}' target='_blank'>#{note}</a><hr>#{timestamp}", ttl: -1
   
 ])
