@@ -40,6 +40,7 @@ db.once 'open', ->
         if error?
           console.error 'error on', (new Date())
           console.error 'could not read comments from database:', error
+          console.error ''
           return
         
         return if comments?.length is 0
@@ -85,6 +86,8 @@ db.once 'open', ->
                 else
                   return
                 
+                console.error ''
+                
                 console.log 'removed on', (new Date())
                 console.log comment.permalink
                 console.log message
@@ -95,6 +98,7 @@ db.once 'open', ->
                   if error?
                     console.error 'error on', (new Date())
                     console.error "could not update comment #{comment.id}:", error
+                    console.error ''
                   else
                     io.sockets.emit 'removed', comment
                     # push.send
@@ -115,6 +119,7 @@ db.once 'open', ->
                   if error?
                     console.error 'error on', (new Date())
                     console.error "could not update comment #{comment.id}:", error
+                    console.error ''
                   else
                     io.sockets.emit 'reminded', comment
                     # push.send
@@ -129,6 +134,7 @@ db.once 'open', ->
     if error?
       console.error 'error on', (new Date())
       console.error 'could not log in:', error
+      console.error ''
     else
       console.log 'logged in!'
       remind()
@@ -138,6 +144,7 @@ db.once 'open', ->
   stream.on 'error', (error) ->
     console.error 'error on', (new Date())
     console.error 'error retrieving comments', error
+    console.error ''
   
   stream.on 'comment', (comment) ->
     
@@ -151,6 +158,7 @@ db.once 'open', ->
         if error?
           console.error 'error on', (new Date())
           console.error "could get link info for comment #{comment.id}:", error
+          console.error ''
         else
           
           link = link.data.children[0].data
@@ -192,6 +200,7 @@ db.once 'open', ->
               if error?
                 console.error 'error on', (new Date())
                 console.error "could not save comment #{comment.id}:", error
+                console.error ''
               else
                 console.log 'found on', (new Date())
                 console.log comment.permalink
