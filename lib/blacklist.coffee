@@ -17,4 +17,5 @@ module.exports =
     'tattoos'
     'polandball'
     'talesfromtechsupport'
+    'randomsuperpowers'
   ]
