@@ -1,6 +1,7 @@
 module.exports =
   users: [
     'note-to-self-bot'
+    'HFYBotReborn'
     'bagelhunt'
   ]
   subreddits: [
