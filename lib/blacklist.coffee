@@ -19,4 +19,5 @@ module.exports =
     'polandball'
     'talesfromtechsupport'
     'randomsuperpowers'
+    'subredditdrama'
   ]
