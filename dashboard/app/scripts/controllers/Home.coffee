@@ -81,7 +81,7 @@ angular.module('App.controllers')
               $scope.comment = angular.copy comments[current_id]
             
             $scope.previousComment = ->
-              current_id = comments.length-1 if --current_id is -1
+              current_id = comments.length - 1 if --current_id is -1
               $scope.comment = angular.copy comments[current_id]
             
             $scope.save = ->
