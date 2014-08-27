@@ -20,4 +20,5 @@ module.exports =
     'talesfromtechsupport'
     'randomsuperpowers'
     'subredditdrama'
+    'wsgy'
   ]
