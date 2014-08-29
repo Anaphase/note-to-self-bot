@@ -21,4 +21,7 @@ module.exports =
     'randomsuperpowers'
     'subredditdrama'
     'wsgy'
+    'pokemontrades'
+    'svexchange'
+    'cfb'
   ]
