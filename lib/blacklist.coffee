@@ -24,4 +24,7 @@ module.exports =
     'pokemontrades'
     'svexchange'
     'cfb'
+    'aww'
+    'redditdads'
+    'drugs'
   ]
