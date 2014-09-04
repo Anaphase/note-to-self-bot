@@ -178,7 +178,12 @@ db.once 'open', ->
                   match = match.substr(0, match.indexOf(character))
                   break
             
-            note_to_self = match.replace(/\*|\~/g, '').trim()
+            note_to_self = match
+              .replace('&lt;', '<')
+              .replace('&gt;', '>')
+              .replace('&amp;', '&')
+              .replace(/\*|\~/g, '')
+              .trim()
             
             comment = new Comment(
               id: comment.id
