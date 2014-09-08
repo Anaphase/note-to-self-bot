@@ -1,7 +1,10 @@
 # reddit API wrapper
 rawjs = require 'raw.js'
-stream = new rawjs.CommentStream(run: no)
 reddit = new rawjs('note-to-self-bot by /u/Anaphase')
+
+# comment streamer
+RedditStream = require 'reddit-stream'
+stream = new RedditStream 'comments', 'all', 'note-to-self-bot by /u/Anaphase'
 
 # keep your authentication variables here
 auth = require './lib/auth'
@@ -28,6 +31,7 @@ blacklist = require './lib/blacklist'
 db.once 'open', ->
   
   remind = ->
+    
     past = (Date.now() / 1000) - (60 * 60 * 24)
     Comment
       .where 'created_utc'
@@ -133,89 +137,100 @@ db.once 'open', ->
   reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->
     if error?
       console.error 'error on', (new Date())
-      console.error 'could not log in:', error
+      console.error 'could not log in (bot):', error
       console.error ''
     else
-      console.log 'logged in!'
-      remind()
-      stream.start()
-      setInterval remind, 60 * 1000
+      stream.login(auth.reddit).then(
+        ->
+          console.log 'logged in!'
+          remind()
+          stream.start()
+          setInterval remind, 60 * 1000
+        (error) ->
+          console.error 'error on', (new Date())
+          console.error 'could not log in (comment streamer):', error
+          console.error ''
+      )
   
   stream.on 'error', (error) ->
     console.error 'error on', (new Date())
     console.error 'error retrieving comments', error
     console.error ''
   
-  stream.on 'comment', (comment) ->
+  stream.on 'new', (comments) ->
     
-    return if comment.author.toLowerCase() in blacklist.users
-    return if comment.subreddit.toLowerCase() in blacklist.subreddits
-    
-    if (/note to self/gi).test comment.body
+    for comment in comments
       
-      reddit.comments { link: comment.link_id[3..] }, (error, link) ->
+      continue if comment.data.author.toLowerCase() in blacklist.users
+      continue if comment.data.subreddit.toLowerCase() in blacklist.subreddits
+      
+      if (/note to self/gi).test comment.data.body
         
-        if error?
-          console.error 'error on', (new Date())
-          console.error "could get link info for comment #{comment.id}:", error
-          console.error ''
-        else
+        do (comment) ->
           
-          link = link.data.children[0].data
-          matches = comment.body.trim().match(/note to self\s*[:|\-|,|;\.]*\s*([^.!?\n]+[.!?]*)/i)
-          
-          if matches?
-            paren_stack = []
-            match = matches[1]
+          reddit.comments { link: comment.data.link_id[3..] }, (error, link) ->
             
-            for character in match
-              if character is '('
-                paren_stack.push character
-              else if character is ')'
-                if paren_stack.length > 0
-                  paren_stack.pop()
-                else
-                  match = match.substr(0, match.indexOf(character))
-                  break
-            
-            note_to_self = match
-              .replace('&lt;', '<')
-              .replace('&gt;', '>')
-              .replace('&amp;', '&')
-              .replace(/\*|\~/g, '')
-              .trim()
-            
-            comment = new Comment(
-              id: comment.id
-              name: comment.name
-              body: comment.body
-              note_to_self: note_to_self
-              author: comment.author
-              thumbnail: link.thumbnail
-              link_url: comment.link_url
-              subreddit: comment.subreddit
-              body_html: comment.body_html
-              link_title: comment.link_title
-              link_author: comment.link_author
-              created_utc: comment.created_utc
-              permalink: "http://reddit.com#{link.permalink}#{comment.id}/?context=3"
-            )
-            
-            comment.save (error, comment) ->
-              if error?
-                console.error 'error on', (new Date())
-                console.error "could not save comment #{comment.id}:", error
-                console.error ''
-              else
-                console.log 'found on', (new Date())
-                console.log comment.permalink
-                console.log comment.note_to_self
-                console.log ''
+            if error?
+              console.error 'error on', (new Date())
+              console.error "could get link info for comment #{comment.data.id}:", error
+              console.error ''
+            else
+              
+              link = link.data.children[0].data
+              matches = comment.data.body.trim().match(/note to self\s*[:|\-|,|;\.]*\s*([^.!?\n]+[.!?]*)/i)
+              
+              if matches?
+                paren_stack = []
+                match = matches[1]
                 
-                io.sockets.emit 'new-comment', comment
-                push.send
-                  message: "#{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
-                  timestamp: Math.round((new Date()).getTime() / 1000)
-                  url_title: 'view on reddit'
-                  url: comment.permalink
-                  title: 'NTSB'
+                for character in match
+                  if character is '('
+                    paren_stack.push character
+                  else if character is ')'
+                    if paren_stack.length > 0
+                      paren_stack.pop()
+                    else
+                      match = match.substr(0, match.indexOf(character))
+                      break
+                
+                note_to_self = match
+                  .replace('&lt;', '<')
+                  .replace('&gt;', '>')
+                  .replace('&amp;', '&')
+                  .replace(/\*|\~/g, '')
+                  .trim()
+                
+                comment = new Comment(
+                  id: comment.data.id
+                  name: comment.data.name
+                  body: comment.data.body
+                  note_to_self: note_to_self
+                  author: comment.data.author
+                  thumbnail: link.thumbnail
+                  link_url: comment.data.link_url
+                  subreddit: comment.data.subreddit
+                  body_html: comment.data.body_html
+                  link_title: comment.data.link_title
+                  link_author: comment.data.link_author
+                  created_utc: comment.data.created_utc
+                  permalink: "http://reddit.com#{link.permalink}#{comment.data.id}/?context=3"
+                )
+                
+                comment.save (error, comment) ->
+                  if error?
+                    console.error 'error on', (new Date())
+                    console.error "could not save comment #{comment.id}:", error
+                    console.error ''
+                  else
+                    console.log 'found on', (new Date())
+                    console.log comment.permalink
+                    console.log comment.note_to_self
+                    console.log ''
+                    
+                    io.sockets.emit 'new-comment', comment
+                    push.send
+                      message: "#{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
+                      timestamp: Math.round((new Date()).getTime() / 1000)
+                      url_title: 'view on reddit'
+                      url: comment.permalink
+                      title: 'NTSB'
