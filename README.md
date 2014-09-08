@@ -2,7 +2,7 @@
 
 NTSB is a reddit bot that scans comments for 'note to self' and replies with a reminder one day later.
 
-The bot uses [reddit-stream](https://github.com/Anaphase/reddit-stream) to scan comments and [MongoDB](https://www.mongodb.org/) to save them locally. The bot uses [socket.io](http://socket.io/) to communicate with the frontend dashboard and [Pushover](https://pushover.net/) to notify your phone when it picks up a comment. NTSB runs forever using [Forever](https://github.com/nodejitsu/forever).
+The bot uses [reddit-stream](https://github.com/Anaphase/reddit-stream) to scan comments, [MongoDB](https://www.mongodb.org/)/[Mongoose](http://mongoosejs.com/) to save them locally, and [raw.js](https://bitbucket.org/Doctor_McKay/raw.js) to send comment replies. The bot uses [socket.io](http://socket.io/) to communicate with the frontend dashboard and [Pushover](https://pushover.net/) to notify your phone when it picks up a comment. NTSB runs forever using [Forever](https://github.com/nodejitsu/forever).
 
 ## Bot
 `ntsb-bot.coffee` performs the scanning and database operations.
