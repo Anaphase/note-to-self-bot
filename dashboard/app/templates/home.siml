@@ -11,7 +11,7 @@ div.container
           th 'Time'
       tbody
         tr
-          @class("{'flagged': comment.author === 'totally_not_a_bot'}")
+          @class("{'flagged': comment.author === 'totally_not_a_bot' || comment.subreddit === 'totally_not_a_bot'}")
           @click(editComment(comment))
           @repeat(comment in comments)
           
