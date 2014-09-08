@@ -168,7 +168,7 @@ db.once 'open', ->
         
         do (comment) ->
           
-          reddit.comments { link: comment.data.link_id[3..] }, (error, link) ->
+          reddit.comments { link: comment.data.link_id[3..] }, (error, comments, link) ->
             
             if error?
               console.error 'error on', (new Date())
