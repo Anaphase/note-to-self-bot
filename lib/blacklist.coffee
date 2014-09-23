@@ -27,4 +27,5 @@ module.exports =
     'aww'
     'redditdads'
     'drugs'
+    'anime'
   ]
