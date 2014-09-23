@@ -9,6 +9,11 @@ exports.config =
     definition: no
   
   plugins:
+    coffeelint:
+      pattern: /^app\/.*\.coffee$/
+      options:
+        max_line_length:
+          level: 'ignore'
     siml:
       moduleName: 'App.templates'
   
