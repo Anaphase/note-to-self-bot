@@ -3,6 +3,7 @@ module.exports =
     'note-to-self-bot'
     'HFYBotReborn'
     'bagelhunt'
+    'doggie015'
   ]
   subreddits: [
     'fatpeoplehate'
