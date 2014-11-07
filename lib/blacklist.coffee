@@ -30,4 +30,5 @@ module.exports =
     'drugs'
     'anime'
     'android'
+    'badhistory'
   ]
