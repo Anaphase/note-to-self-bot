@@ -13,8 +13,8 @@ auth = require './lib/auth'
 Pushover = require 'pushover-notifications'
 push = new Pushover(user: auth.pushover.user, token: auth.pushover.token)
 
-# use socket.io to send notifications to web front-end
-io = require('socket.io').listen(7070)
+# use socket.io to send & recieve notifications to & from dashboard (via the API)
+socket = require('socket.io-client')('http://localhost:8080')
 
 # use mongoose to interface with MongoDB
 mongoose = require 'mongoose'
@@ -27,6 +27,8 @@ Comment = require './lib/schemas/Comment'
 
 # load users and subreddits to skip
 blacklist = require './lib/blacklist'
+
+socket.on 'read-only', -> console.log 'switching to read-only'
 
 db.once 'open', ->
   
@@ -104,7 +106,7 @@ db.once 'open', ->
                     console.error "could not update comment #{comment.id}:", error
                     console.error ''
                   else
-                    io.sockets.emit 'removed', comment
+                    socket.emit 'removed', comment
                     # push.send
                     #   timestamp: Math.round((new Date()).getTime() / 1000)
                     #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
@@ -125,7 +127,7 @@ db.once 'open', ->
                     console.error "could not update comment #{comment.id}:", error
                     console.error ''
                   else
-                    io.sockets.emit 'reminded', comment
+                    socket.emit 'reminded', comment
                     # push.send
                     #   timestamp: Math.round((new Date()).getTime() / 1000)
                     #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
@@ -227,7 +229,7 @@ db.once 'open', ->
                     console.log comment.note_to_self
                     console.log ''
                     
-                    io.sockets.emit 'new-comment', comment
+                    socket.emit 'new-comment', comment
                     push.send
                       message: "#{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
                       timestamp: Math.round((new Date()).getTime() / 1000)

@@ -11,7 +11,7 @@ angular.module('App.services')
     unless io?
       growl.error 'could not load socket.io'
     else
-      socket = io.connect App.addresses.socket_io
+      socket = io.connect App.addresses.api
     
     on: (event, callback) ->
       return unless socket?
