@@ -4,7 +4,7 @@ reddit = new rawjs('note-to-self-bot by /u/Anaphase')
 
 # comment streamer
 RedditStream = require 'reddit-stream'
-stream = new RedditStream 'comments', 'all', 'note-to-self-bot by /u/Anaphase'
+stream = new RedditStream('comments', 'all', 'note-to-self-bot by /u/Anaphase')
 
 # keep your authentication variables here
 auth = require './lib/auth'
