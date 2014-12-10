@@ -14,7 +14,7 @@
     "mongoose": "3.8.8",
     "socket.io": "1.0.6",
     "body-parser": "1.0.2",
-    "reddit-stream": "1.1.0",
+    "reddit-stream": "1.2.0",
     "socket.io-client": "1.2.1",
     "pushover-notifications": "0.1.8"
   },

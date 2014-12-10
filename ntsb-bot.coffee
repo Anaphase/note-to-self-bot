@@ -6,6 +6,10 @@ reddit = new rawjs('note-to-self-bot by /u/Anaphase')
 RedditStream = require 'reddit-stream'
 stream = new RedditStream('comments', 'all', 'note-to-self-bot by /u/Anaphase')
 
+# these hold the interval time and setInterval ID for the remind loop
+remind_interval_id = null
+remind_interval = 60 * 1000
+
 # keep your authentication variables here
 auth = require './lib/auth'
 
@@ -24,17 +28,76 @@ db.on 'error', console.error.bind(console, 'connection error:')
 
 # load mongoose schemas
 Comment = require './lib/schemas/Comment'
+Setting = require './lib/schemas/Setting'
 
 # load users and subreddits to skip
 blacklist = require './lib/blacklist'
 
-socket.on 'read-only', -> console.log 'switching to read-only'
-
 db.once 'open', ->
+  
+  # make sure settings exist, if not create them
+  # also, start the bot once we know the settings
+  (new Setting()).checkSettings().then (required_settings) ->
+    
+    scan = (setting.value for setting in required_settings when setting.name is 'scan')[0]
+    remind = (setting.value for setting in required_settings when setting.name is 'remind')[0]
+    
+    reddit.setupOAuth2 auth.reddit.app.id, auth.reddit.app.secret
+    reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->
+      if error?
+        console.error 'error on', (new Date())
+        console.error 'could not log in (bot):', error
+        console.error ''
+      else
+        stream.login(auth.reddit).then(
+          ->
+            
+            console.log 'logged in!'
+            
+            if scan is on
+              console.log 'scanning...'
+              stream.start()
+            
+            if remind is on
+              console.log 'reminding...'
+              remind()
+              remind_interval_id = setInterval remind, remind_interval
+            
+          (error) ->
+            console.error 'error on', (new Date())
+            console.error 'could not log in (comment streamer):', error
+            console.error ''
+        )
+  
+  socket.on 'setting-changed', (setting, new_state, old_state) ->
+    
+    return if old_state is new_state
+    
+    switch setting
+      when 'scan'
+        
+        if new_state is off
+          stream.stop()
+        
+        if new_state is on
+          stream.start()
+      
+      when 'remind'
+        
+        if new_state is off
+          clearInterval remind_interval
+        
+        if new_state is on
+          remind()
+          remind_interval_id = setInterval remind, remind_interval
+    
+    console.log 'switched', setting, 'setting from', old_state, 'to', new_state, 'on', (new Date())
+    console.log ''
   
   remind = ->
     
     past = (Date.now() / 1000) - (60 * 60 * 24)
+    
     Comment
       .where 'created_utc'
         .lte past
@@ -134,25 +197,6 @@ db.once 'open', ->
                     #   url_title: 'view on reddit'
                     #   url: comment.permalink
                     #   title: 'NTSB Replied'
-  
-  reddit.setupOAuth2 auth.reddit.app.id, auth.reddit.app.secret
-  reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->
-    if error?
-      console.error 'error on', (new Date())
-      console.error 'could not log in (bot):', error
-      console.error ''
-    else
-      stream.login(auth.reddit).then(
-        ->
-          console.log 'logged in!'
-          remind()
-          stream.start()
-          setInterval remind, 60 * 1000
-        (error) ->
-          console.error 'error on', (new Date())
-          console.error 'could not log in (comment streamer):', error
-          console.error ''
-      )
   
   stream.on 'error', (error) ->
     console.error 'error on', (new Date())

@@ -16,6 +16,7 @@ db.on 'error', console.error.bind(console, 'connection error:')
 
 # load mongoose schemas
 Comment = require './lib/schemas/Comment'
+Setting = require './lib/schemas/Setting'
 
 now = new Date
 
@@ -26,6 +27,9 @@ io.on 'connection', (socket) ->
   socket.on 'new-comment', (comment) -> io.sockets.emit 'new-comment', comment
 
 db.once 'open', ->
+  
+  # make sure settings exist, if not create them
+  (new Setting()).checkSettings()
   
   app.use bodyParser()
   
@@ -43,14 +47,49 @@ db.once 'open', ->
       name: 'note-to-self-bot api'
       started: now
   
-  app.get '/event/:event_name?', (request, response) ->
+  app.route '/settings/:name?'
     
-    unless request.params.event_name?
-      response.json no
+    .get (request, response) ->
+      
+      query = Setting.find().select('-_id -__v')
+      
+      if request.params.name?
+        query
+          .limit 1
+          .where 'name'
+            .equals request.params.name
+      
+      query.exec (error, settings) ->
+        return response.json error if error?
+        return response.json undefined unless settings?
+        if request.params.name?
+          response.json settings[0]
+        else
+          response.json settings
     
-    io.sockets.emit request.params.event_name
-    
-    response.json yes
+    .post (request, response) ->
+      
+      return response.json null unless request.params.name?
+      
+      query = Setting.findOne(name: request.params.name)
+      
+      query.exec (error, setting) ->
+        
+        return response.json error if error?
+        return response.json undefined unless setting?
+        
+        old_value = setting.value
+        new_value = request.body.value
+        
+        unless new_value? and old_value isnt new_value
+          return response.json setting
+        
+        setting.value = new_value
+        
+        setting.save (error) ->
+          response.json error if error?
+          io.sockets.emit 'setting-changed', request.params.name, new_value, old_value
+          response.json setting
   
   app.route '/comments/:id?'
     
@@ -70,7 +109,10 @@ db.once 'open', ->
             .equals no
       
       query.exec (error, comments) ->
+        
         return response.json error if error?
+        return response.json undefined unless comments?
+        
         if request.params.id?
           response.json comments[0]
         else
@@ -80,19 +122,15 @@ db.once 'open', ->
       
       return response.json null unless request.params.id?
       
-      query = Comment.find()
-        .limit 1
-        .where 'id'
-          .equals request.params.id
+      query = Comment.findOne(id: request.params.id)
       
-      query.exec (error, comments) ->
+      query.exec (error, comment) ->
         
         return response.json error if error?
+        return response.json undefined unless comment?
         
-        comment = comments[0]
-        
-        comment.add_message = request.body.add_message
-        comment.note_to_self = request.body.note_to_self
+        comment.add_message = request.body.add_message if request.body.add_message?
+        comment.note_to_self = request.body.note_to_self if request.body.add_message?
         
         comment.save (error) ->
           response.json error if error?
@@ -102,16 +140,12 @@ db.once 'open', ->
       
       return response.json null unless request.params.id?
       
-      query = Comment.find()
-        .limit 1
-        .where 'id'
-          .equals request.params.id
+      query = Comment.findOne(id: request.params.id)
       
-      query.exec (error, comments) ->
+      query.exec (error, comment) ->
         
         return response.json error if error?
-        
-        comment = comments[0]
+        return response.json undefined unless comment?
         
         comment.remove (error) ->
           response.json error if error?

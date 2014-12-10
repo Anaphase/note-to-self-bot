@@ -1,7 +1,12 @@
 div.container
   
   header
-    h1 @bind(App.name)
+    h1
+      span @bind(App.name)
+      a.small
+        @click(editSettings())
+        
+        span.pull-right.glyphicon.glyphicon-cog
   
   section
     table.table.table-hover

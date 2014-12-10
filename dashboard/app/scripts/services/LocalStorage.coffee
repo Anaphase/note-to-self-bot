@@ -2,7 +2,7 @@ angular.module('App.services')
 
 .factory('LocalStorage', [
   
-  () ->
+  ->
     
     get: (name) -> JSON.parse localStorage.getItem(name) or null
     put: (name, data) ->

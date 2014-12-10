@@ -59,9 +59,10 @@ angular.module('App', [
             
             '$q'
             'App'
+            'growl'
             '$resource'
             
-            ($q, App, $resource) ->
+            ($q, App, growl, $resource) ->
               
               deferred = $q.defer()
               
@@ -74,6 +75,40 @@ angular.module('App', [
                   console.error error
                   deferred.resolve error
                   growl.error 'could not get comments'
+              ]
+              
+              deferred.promise
+            
+          ]
+          Setting: [
+            
+            'App'
+            '$resource'
+            
+            (App, $resource) ->
+              Setting = $resource "#{App.addresses.api}/settings/:setting/:value", setting: '@setting'
+             
+          ]
+          settings: [
+            
+            '$q'
+            'App'
+            'growl'
+            '$resource'
+            
+            ($q, App, growl, $resource) ->
+              
+              deferred = $q.defer()
+              
+              Setting = $resource "#{App.addresses.api}/settings/:name", name: '@name'
+              
+              settings = Setting.query.apply Setting, [
+                ->
+                  deferred.resolve settings
+                (error) ->
+                  console.error error
+                  deferred.resolve error
+                  growl.error 'could not get settings'
               ]
               
               deferred.promise

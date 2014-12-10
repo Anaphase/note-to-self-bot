@@ -1,0 +1,35 @@
+div
+  div.modal-header
+    h3
+      span 'Edit Settings'
+  
+  div.modal-body
+    form
+      @submit(save())
+      
+      div
+        @repeat(setting in settings)
+        
+        div.checkbox
+          @if('setting.type === "boolean"')
+          
+          label
+            input:checkbox
+              @model(setting.value)
+            span @bind(setting.label)
+        
+        div.form-group
+          @if('setting.type === "string"')
+          
+          label @bind(setting.label)
+          input:text
+            @model(setting.value)
+  
+  div.modal-footer.clearfix
+    button.btn.btn-success
+      @click(save(comment))
+      'Save'
+    
+    button.btn.btn-default
+      @click(cancel())
+      'Cancel'

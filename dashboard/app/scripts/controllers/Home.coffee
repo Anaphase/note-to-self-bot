@@ -10,19 +10,62 @@ angular.module('App.controllers')
   '$filter'
   'Comment'
   'comments'
+  'Setting'
+  'settings'
   '$timeout'
   
-  (growl, $http, socket, $scope, $modal, $filter, Comment, comments, $timeout) ->
+  (growl, $http, socket, $scope, $modal, $filter, Comment, comments, Setting, settings, $timeout) ->
     
+    $scope.settings = settings
     $scope.comments = comments
     
-    getCommentIndex = (comment_to_delete) ->
+    getSettingIndex = (setting_to_retrieve) ->
+      for setting, index in $scope.settings
+        if setting.name is setting_to_retrieve.name
+          return index
+    
+    getCommentIndex = (comment_to_retrieve) ->
       for comment, index in $scope.comments
-        if comment.id is comment_to_delete.id
+        if comment.id is comment_to_retrieve.id
           return index
     
     removeComment = (index) ->
       $scope.comments.splice index, 1
+    
+    $scope.editSettings = ->
+      
+      $modal.open
+        templateUrl: 'partials/settings-modal'
+        controller: [
+          
+          '$scope'
+          '$modalInstance'
+          
+          ($scope, $modalInstance) ->
+            
+            $scope.settings = angular.copy settings
+            
+            $scope.save = ->
+              
+              
+              
+              for setting in settings
+                do (setting) ->
+                  setting.value = $scope.settings[getSettingIndex(setting)].value
+                  setting.$save.apply setting, [
+                    ->
+                      growl.success 'setting updated'
+                      $modalInstance.close 'setting updated'
+                    (error) ->
+                      console.error error
+                      growl.error 'could not save setting'
+                      # $modalInstance.dismiss 'could not save setting'
+                  ]
+            
+            $scope.cancel = ->
+              $modalInstance.dismiss 'canceled'
+          
+        ]
     
     $scope.editComment = (comment) ->
       
@@ -35,10 +78,9 @@ angular.module('App.controllers')
           'growl'
           '$scope'
           'hotkeys'
-          '$document'
           '$modalInstance'
           
-          (growl, $scope, hotkeys, $document, $modalInstance) ->
+          (growl, $scope, hotkeys, $modalInstance) ->
             
             $scope.comment = angular.copy comments[current_id]
             
@@ -93,11 +135,11 @@ angular.module('App.controllers')
                 ->
                   growl.success 'comment updated'
                   $scope.nextComment()
-                  #$modalInstance.close 'comment updated'
+                  # $modalInstance.close 'comment updated'
                 (error) ->
                   console.error error
                   growl.error 'could not save comment'
-                  $modalInstance.close 'could not save comment'
+                  # $modalInstance.dismiss 'could not save comment'
               ]
             
             $scope.delete = ->
@@ -111,14 +153,15 @@ angular.module('App.controllers')
                     growl.success 'comment deleted'
                     current_id = 0 if current_id is comments.length
                     $scope.comment = angular.copy comments[current_id]
-                    #$modalInstance.close 'comment deleted'
+                    # $modalInstance.close 'comment deleted'
                   (error) ->
                     console.error error
                     growl.error 'could not delete comment'
+                    # $modalInstance.dismiss 'could not delete comment'
                 ]
             
             $scope.cancel = ->
-              $modalInstance.dismiss('canceled')
+              $modalInstance.dismiss 'canceled'
           
         ]
     

@@ -10,7 +10,7 @@ angular.module('App.directives')
       end: '@'
     link: (scope, element, attrs) ->
       
-      delay = (60*60*24)
+      delay = (60 * 60 * 24)
       update_timeout = null
       
       update = ->
@@ -19,7 +19,7 @@ angular.module('App.directives')
         seconds_left = scope.end - (now - delay)
         
         if seconds_left <= 0
-          element.text '?'
+          element.text '...'
           return $timeout.cancel update_timeout
         else if seconds_left <= 60
           time_left = seconds_left
@@ -35,7 +35,7 @@ angular.module('App.directives')
           unit = 'h'
         
         element.text "#{time_left}#{unit}"
-        update_timeout = $timeout update, 1000*interval
+        update_timeout = $timeout update, 1000 * interval
       
       update()
       
