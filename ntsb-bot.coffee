@@ -39,8 +39,8 @@ db.once 'open', ->
   # also, start the bot once we know the settings
   (new Setting()).checkSettings().then (required_settings) ->
     
-    scan = (setting.value for setting in required_settings when setting.name is 'scan')[0]
-    remind = (setting.value for setting in required_settings when setting.name is 'remind')[0]
+    should_scan = (setting.value for setting in required_settings when setting.name is 'scan')[0]
+    should_remind = (setting.value for setting in required_settings when setting.name is 'remind')[0]
     
     reddit.setupOAuth2 auth.reddit.app.id, auth.reddit.app.secret
     reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->
@@ -54,11 +54,11 @@ db.once 'open', ->
             
             console.log 'logged in!'
             
-            if scan is on
+            if should_scan is on
               console.log 'scanning...'
               stream.start()
             
-            if remind is on
+            if should_remind is on
               console.log 'reminding...'
               remind()
               remind_interval_id = setInterval remind, remind_interval
@@ -89,6 +89,7 @@ db.once 'open', ->
         
         if new_state is on
           remind()
+          clearInterval remind_interval
           remind_interval_id = setInterval remind, remind_interval
     
     console.log 'switched', setting, 'setting from', old_state, 'to', new_state, 'on', (new Date())
