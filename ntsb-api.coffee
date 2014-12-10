@@ -15,8 +15,8 @@ mongoose.connect 'mongodb://localhost/ntsb'
 db.on 'error', console.error.bind(console, 'connection error:')
 
 # load mongoose schemas
-Comment = require './lib/schemas/Comment'
-Setting = require './lib/schemas/Setting'
+Comment = require './lib/models/Comment'
+Setting = require './lib/models/Setting'
 
 now = new Date
 
