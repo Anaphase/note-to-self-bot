@@ -41,6 +41,7 @@ db.once 'open', ->
     
     should_scan = (setting.value for setting in required_settings when setting.name is 'scan')[0]
     should_remind = (setting.value for setting in required_settings when setting.name is 'remind')[0]
+    should_pushover = (setting.value for setting in required_settings when setting.name is 'should_pushover')[0]
     
     reddit.setupOAuth2 auth.reddit.app.id, auth.reddit.app.secret
     reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->
@@ -137,22 +138,24 @@ db.once 'open', ->
                 
                 if error is '403: Forbidden'
                   console.error 'detected possible newly blacklisted subreddit:', comment.subreddit
-                  push.send
-                    timestamp: Math.round((new Date()).getTime() / 1000)
-                    message: "detected possible newly blacklisted subreddit: #{comment.subreddit}\n\nhttp://ps.tl/ntsb/"
-                    url_title: 'view on reddit'
-                    url: comment.permalink
-                    title: 'NTSB Alert'
+                  if should_pushover
+                    push.send
+                      timestamp: Math.round((new Date()).getTime() / 1000)
+                      message: "detected possible newly blacklisted subreddit: #{comment.subreddit}\n\nhttp://ps.tl/ntsb/"
+                      url_title: 'view on reddit'
+                      url: comment.permalink
+                      title: 'NTSB Alert'
                 else if typeof error is 'object'
                   switch error[0]
                     when 'DELETED_COMMENT'
                       console.error "detected deleted comment #{comment.id}:", comment.permalink
-                      push.send
-                        timestamp: Math.round((new Date()).getTime() / 1000)
-                        message: "detected deleted comment #{comment.id}: #{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
-                        url_title: 'view on reddit'
-                        url: comment.permalink
-                        title: 'NTSB Alert'
+                      if should_pushover
+                        push.send
+                          timestamp: Math.round((new Date()).getTime() / 1000)
+                          message: "detected deleted comment #{comment.id}: #{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
+                          url_title: 'view on reddit'
+                          url: comment.permalink
+                          title: 'NTSB Alert'
                 else
                   return
                 
@@ -171,12 +174,13 @@ db.once 'open', ->
                     console.error ''
                   else
                     socket.emit 'removed', comment
-                    # push.send
-                    #   timestamp: Math.round((new Date()).getTime() / 1000)
-                    #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
-                    #   url_title: 'view on reddit'
-                    #   url: comment.permalink
-                    #   title: 'NTSB Removed'
+                    # if should_pushover
+                    #   push.send
+                    #     timestamp: Math.round((new Date()).getTime() / 1000)
+                    #     message: "#{message}\n\nhttp://ps.tl/ntsb/"
+                    #     url_title: 'view on reddit'
+                    #     url: comment.permalink
+                    #     title: 'NTSB Removed'
                 
               else
                 console.log 'commented on', (new Date())
@@ -192,12 +196,13 @@ db.once 'open', ->
                     console.error ''
                   else
                     socket.emit 'reminded', comment
-                    # push.send
-                    #   timestamp: Math.round((new Date()).getTime() / 1000)
-                    #   message: "#{message}\n\nhttp://ps.tl/ntsb/"
-                    #   url_title: 'view on reddit'
-                    #   url: comment.permalink
-                    #   title: 'NTSB Replied'
+                    # if should_pushover
+                    #   push.send
+                    #     timestamp: Math.round((new Date()).getTime() / 1000)
+                    #     message: "#{message}\n\nhttp://ps.tl/ntsb/"
+                    #     url_title: 'view on reddit'
+                    #     url: comment.permalink
+                    #     title: 'NTSB Replied'
   
   stream.on 'error', (error) ->
     console.error 'error on', (new Date())
@@ -275,9 +280,10 @@ db.once 'open', ->
                     console.log ''
                     
                     socket.emit 'new-comment', comment
-                    push.send
-                      message: "#{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
-                      timestamp: Math.round((new Date()).getTime() / 1000)
-                      url_title: 'view on reddit'
-                      url: comment.permalink
-                      title: 'NTSB'
+                    if should_pushover
+                      push.send
+                        message: "#{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
+                        timestamp: Math.round((new Date()).getTime() / 1000)
+                        url_title: 'view on reddit'
+                        url: comment.permalink
+                        title: 'NTSB'

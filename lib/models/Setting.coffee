@@ -27,6 +27,13 @@ schema.methods.checkSettings = ->
       name: 'remind'
       type: 'boolean'
       label: 'Reply to comments in queue'
+  ,
+    name: 'should_pushover'
+    value:
+      value: on
+      name: 'should_pushover'
+      type: 'boolean'
+      label: 'Send Pushover notifications'
   ]
   
   Setting.find().select('-_id -__v').exec (error, settings) ->
