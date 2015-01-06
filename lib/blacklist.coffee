@@ -31,4 +31,5 @@ module.exports =
     'anime'
     'android'
     'badhistory'
+    'pokemonplaza'
   ]
