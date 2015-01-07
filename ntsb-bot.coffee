@@ -33,6 +33,11 @@ Setting = require './lib/models/Setting'
 # load users and subreddits to skip
 blacklist = require './lib/blacklist'
 
+# initialized with DB settings below
+should_scan = no
+should_remind = no
+should_pushover = no
+
 db.once 'open', ->
   
   # make sure settings exist, if not create them
@@ -92,6 +97,10 @@ db.once 'open', ->
           remind()
           clearInterval remind_interval
           remind_interval_id = setInterval remind, remind_interval
+      
+      when 'should_pushover'
+        
+        should_pushover = new_state
     
     console.log 'switched', setting, 'setting from', old_state, 'to', new_state, 'on', (new Date())
     console.log ''
