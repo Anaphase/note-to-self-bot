@@ -32,4 +32,5 @@ module.exports =
     'android'
     'badhistory'
     'pokemonplaza'
+    'motorcycles'
   ]
