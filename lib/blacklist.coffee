@@ -33,4 +33,5 @@ module.exports =
     'badhistory'
     'pokemonplaza'
     'motorcycles'
+    'mindcrack'
   ]
