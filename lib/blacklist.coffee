@@ -34,4 +34,6 @@ module.exports =
     'pokemonplaza'
     'motorcycles'
     'mindcrack'
+    'raisedbynarcissists'
+    'bodyweightfitness'
   ]
