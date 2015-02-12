@@ -4,6 +4,7 @@ module.exports =
     'HFYBotReborn'
     'bagelhunt'
     'doggie015'
+    'Thunder_strike'
   ]
   subreddits: [
     'fatpeoplehate'
