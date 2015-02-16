@@ -5,6 +5,7 @@ module.exports =
     'bagelhunt'
     'doggie015'
     'Thunder_strike'
+    'crushdepth5thFaction'
   ]
   subreddits: [
     'fatpeoplehate'
