@@ -38,4 +38,5 @@ module.exports =
     'mindcrack'
     'raisedbynarcissists'
     'bodyweightfitness'
+    'outoftheloop'
   ]
