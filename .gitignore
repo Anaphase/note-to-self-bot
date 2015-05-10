@@ -1,2 +1,3 @@
 node_modules/
 lib/auth.coffee
+npm-debug.log
