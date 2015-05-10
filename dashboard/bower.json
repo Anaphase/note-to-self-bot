@@ -3,18 +3,16 @@
   "version": "1.0.0",
   "main": "public/js/app.js",
   "dependencies": {
-    
-    "angular": "1.2.21",
-    "angular-route": "1.2.21",
-    "angular-animate": "1.2.21",
-    "angular-resource": "1.2.21",
-    "angular-sanitize": "1.2.21",
-    
-    "json3": "3.3.2",
+    "angular": "^1.2.21",
+    "angular-route": "^1.2.21",
+    "angular-animate": "^1.2.21",
+    "angular-resource": "^1.2.21",
+    "angular-sanitize": "^1.2.21",
+    "json3": "^3.3.2",
     "strapless": "latest",
-    "angular-growl-v2": "0.6.1",
-    "socket.io-client": "1.0.6",
-    "angular-bootstrap": "0.12.0",
+    "angular-growl-v2": "^0.6.1",
+    "socket.io-client": "^1.0.6",
+    "angular-bootstrap": "^0.12.0",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#1.4.1"
   },
   "overrides": {
@@ -28,10 +26,16 @@
       "main": "less/bootstrap.less"
     },
     "angular-hotkeys": {
-      "main": ["src/hotkeys.js", "src/hotkeys.css"]
+      "main": [
+        "src/hotkeys.js",
+        "src/hotkeys.css"
+      ]
     },
     "mousetrap": {
       "main": "mousetrap.js"
     }
+  },
+  "resolutions": {
+    "angular": "1.3.15"
   }
 }

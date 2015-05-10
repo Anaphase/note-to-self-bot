@@ -1,23 +1,24 @@
 {
   "name": "note-to-self-bot-dashboard",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Anaphase/note-to-self-bot"
+  },
   "description": "A web front-end that provides a front-end application for easy comment monitoring and manipulation for note-to-self-bot",
   "dependencies": {
-    "bower": "latest",
-    "brunch": "latest",
-    "auto-reload-brunch": "latest",
-    
-    "css-brunch": "latest",
-    "less-brunch": "latest",
-    "stylus-brunch": "latest",
-    "clean-css-brunch": "latest",
-    
-    "uglify-js-brunch": "latest",
-    "javascript-brunch": "latest",
-    "coffeelint-brunch": "latest",
-    "coffee-script-brunch": "latest",
-    
-    "siml-angular-brunch": "latest"
+    "auto-reload-brunch": "^1.7.8",
+    "bower": "^1.4.1",
+    "brunch": "^1.8.2",
+    "clean-css-brunch": "^1.7.2",
+    "coffee-script-brunch": "^1.8.1",
+    "coffeelint-brunch": "^1.7.0",
+    "css-brunch": "^1.7.0",
+    "javascript-brunch": "^1.7.1",
+    "less-brunch": "^1.8.1",
+    "siml-angular-brunch": "^1.0.5",
+    "stylus-brunch": "^1.8.1",
+    "uglify-js-brunch": "^1.7.8"
   },
   "author": {
     "name": "Colin Wood",
