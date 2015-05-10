@@ -11,7 +11,7 @@
     "url": "https://github.com/Anaphase/note-to-self-bot"
   },
   "scripts": {
-    "postinstall": "cd dashboard && npm install && ./node_modules/bower/bin/bower install && ./node_modules/brunch/bin/brunch b && cd .. && ./backend start api && ./backend start bot"
+    "postinstall": "cd dashboard && npm install && ./node_modules/bower/bin/bower install && ./node_modules/brunch/bin/brunch b"
   },
   "dependencies": {
     "body-parser": "^1.12.3",
