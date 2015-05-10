@@ -1,6 +1,9 @@
 {
   "name": "note-to-self-bot-dashboard",
   "version": "1.0.0",
+  "engines": {
+    "node": "0.10.x"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Anaphase/note-to-self-bot"
