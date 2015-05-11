@@ -8,6 +8,6 @@ angular.module('App.services')
     version: '1.1.0'
 
     addresses:
-      api: window.location.hostname
+      api: "http://#{window.location.hostname}"
 
 ])
