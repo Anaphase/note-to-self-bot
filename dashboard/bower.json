@@ -9,7 +9,7 @@
     "angular-resource": "^1.2.21",
     "angular-sanitize": "^1.2.21",
     "json3": "^3.3.2",
-    "strapless": "latest",
+    "strapless": "3.2.0",
     "angular-growl-v2": "^0.6.1",
     "socket.io-client": "^1.0.6",
     "angular-bootstrap": "^0.12.0",
