@@ -12,15 +12,15 @@ div
       footer
         a[target='_blank']
           @bind(comment.author)
-          @href('http://reddit.com/u/{{comment.author}}')
+          @href('https://reddit.com/u/{{comment.author}}')
         span ' on '
         a[target='_blank']
           @bind(comment.link_title)
           @href('{{comment.permalink}}')
         span ' in '
         a[target='_blank']
-          @href('http://reddit.com/r/{{comment.subreddit}}')
           
+          @href('https://reddit.com/r/{{comment.subreddit}}')
           span '/r/'
           span @bind(comment.subreddit)
     

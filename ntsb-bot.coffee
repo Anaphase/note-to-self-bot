@@ -166,7 +166,7 @@ db.once 'open', ->
                   if should_pushover
                     push.send
                       timestamp: Math.round((new Date()).getTime() / 1000)
-                      message: "detected possible newly blacklisted subreddit: #{comment.subreddit}\n\nhttp://ps.tl/ntsb/"
+                      message: "detected possible newly blacklisted subreddit: #{comment.subreddit}"
                       url_title: 'view on reddit'
                       url: comment.permalink
                       title: 'NTSB Alert'
@@ -177,7 +177,7 @@ db.once 'open', ->
                       if should_pushover
                         push.send
                           timestamp: Math.round((new Date()).getTime() / 1000)
-                          message: "detected deleted comment #{comment.id}: #{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
+                          message: "detected deleted comment #{comment.id}: #{comment.note_to_self}"
                           url_title: 'view on reddit'
                           url: comment.permalink
                           title: 'NTSB Alert'
@@ -202,7 +202,7 @@ db.once 'open', ->
                     # if should_pushover
                     #   push.send
                     #     timestamp: Math.round((new Date()).getTime() / 1000)
-                    #     message: "#{message}\n\nhttp://ps.tl/ntsb/"
+                    #     message: "#{message}"
                     #     url_title: 'view on reddit'
                     #     url: comment.permalink
                     #     title: 'NTSB Removed'
@@ -224,7 +224,7 @@ db.once 'open', ->
                     # if should_pushover
                     #   push.send
                     #     timestamp: Math.round((new Date()).getTime() / 1000)
-                    #     message: "#{message}\n\nhttp://ps.tl/ntsb/"
+                    #     message: "#{message}"
                     #     url_title: 'view on reddit'
                     #     url: comment.permalink
                     #     title: 'NTSB Replied'
@@ -290,7 +290,7 @@ db.once 'open', ->
                   link_title: comment.data.link_title
                   link_author: comment.data.link_author
                   created_utc: comment.data.created_utc
-                  permalink: "http://reddit.com#{link.permalink}#{comment.data.id}/?context=3"
+                  permalink: "https://reddit.com#{link.permalink}#{comment.data.id}/?context=3"
                 )
 
                 comment.save (error, comment) ->
@@ -307,7 +307,7 @@ db.once 'open', ->
                     socket.emit 'new-comment', comment
                     if should_pushover
                       push.send
-                        message: "#{comment.note_to_self}\n\nhttp://ps.tl/ntsb/"
+                        message: "#{comment.note_to_self}"
                         timestamp: Math.round((new Date()).getTime() / 1000)
                         url_title: 'view on reddit'
                         url: comment.permalink
