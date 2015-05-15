@@ -21,6 +21,9 @@ mongoose.connect mongodbUri.formatMongoose(process.env.MONGOLAB_URI)
 Comment = require './lib/models/Comment'
 Setting = require './lib/models/Setting'
 
+# login protection for web frontend on Heroku via wwwhisper
+wwwhisper = require('connect-wwwhisper')
+
 now = new Date
 
 # braodcast any events recieved from the bot
@@ -37,6 +40,9 @@ db.once 'open', ->
   # accept JSON and traditional URL-encoded POST bodies
   app.use bodyParser.json()
   app.use bodyParser.urlencoded extended: true
+
+  # Heroku login via wwwhisper
+  app.use wwwhisper no
 
   # server dashboard through express
   app.use express.static 'dashboard/public'
