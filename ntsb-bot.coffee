@@ -31,7 +31,7 @@ push = new Pushover(user: auth.pushover.user, token: auth.pushover.token)
 
 # use socket.io to send & recieve notifications to & from dashboard (via the API)
 port = process.env.PORT or 8080
-socket_uri = process.env.SOCKET_IO_URI or 'http://localhost'
+socket_uri = process.env.SOCKET_IO_URI or '//localhost'
 socket = require('socket.io-client')("#{socket_uri}:#{port}")
 
 # use mongoose to interface with MongoDB
