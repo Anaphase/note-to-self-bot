@@ -38,7 +38,7 @@ db.once 'open', ->
   (new Setting()).checkSettings()
 
   # Heroku login via wwwhisper
-  app.use wwwhisper()
+  app.use wwwhisper no
 
   # accept JSON and traditional URL-encoded POST bodies
   app.use bodyParser.json()
