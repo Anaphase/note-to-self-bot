@@ -11,19 +11,7 @@ remind_interval_id = null
 remind_interval = 60 * 1000
 
 # keep your authentication variables here
-if process.env.NODE_ENV isnt 'heroku'
-  auth = require './lib/auth'
-else
-  auth =
-    reddit:
-      username: process.env.REDDIT_USERNAME
-      password: process.env.REDDIT_PASSWORD
-      app:
-        id: process.env.REDDIT_APP_ID
-        secret: process.env.REDDIT_APP_SECRET
-    pushover:
-      user: process.env.PUSHOVER_USER
-      token: process.env.PUSHOVER_TOKEN
+auth = require './lib/auth'
 
 # use pushover to send notifications to phones
 Pushover = require 'pushover-notifications'
