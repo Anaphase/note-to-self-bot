@@ -39,7 +39,7 @@ db.once 'open', ->
     server.listen api_port, -> console.log "API is listening on port #{api_port}"
 
   # Heroku login via wwwhisper
-  app.use wwwhisper()
+  app.use wwwhisper no
 
   # accept JSON and traditional URL-encoded POST bodies
   app.use bodyParser.json()
