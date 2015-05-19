@@ -39,4 +39,7 @@ module.exports =
     'raisedbynarcissists'
     'bodyweightfitness'
     'outoftheloop'
+    'wtf'
+    'gifs'
+    'newzealand'
   ]
