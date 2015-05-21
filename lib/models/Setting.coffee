@@ -37,14 +37,6 @@ schema.methods.checkSettings = ->
       name: 'should_pushover'
       type: 'boolean'
       label: 'Send Pushover notifications'
-  ,
-    name: 'api_port'
-    value:
-      value: process.env.PORT or 8080
-      name: 'api_port'
-      type: 'number'
-      label: 'API Port'
-      read_only: yes
   ]
 
   Setting.find().select('-_id -__v').exec (error, settings) ->

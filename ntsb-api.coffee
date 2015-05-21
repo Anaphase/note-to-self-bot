@@ -4,8 +4,10 @@ express = require 'express'
 app = express()
 
 # use socket.io to send & recieve notifications to web dashboard & bot
+port = process.env.PORT or 8080
 server = require('http').Server(app)
 io = require('socket.io')(server)
+server.listen port, -> console.log "API is listening on port #{port}"
 
 # use mongoose to interface with MongoDB
 mongoose = require 'mongoose'
@@ -33,10 +35,7 @@ io.on 'connection', (socket) ->
 db.once 'open', ->
 
   # make sure settings exist, if not create them
-  # also, start the server once we know the settings
-  (new Setting()).checkSettings().then (required_settings) ->
-    api_port = (setting.value for setting in required_settings when setting.name is 'api_port')[0]
-    server.listen api_port, -> console.log "API is listening on port #{api_port}"
+  (new Setting()).checkSettings()
 
   # Heroku login via wwwhisper
   app.use wwwhisper no
