@@ -5,7 +5,7 @@ app = express()
 
 # use socket.io to send & recieve notifications to web dashboard & bot
 server = require('http').Server(app)
-io = require('socket.io').listen(server)
+io = require('socket.io')(server)
 
 # use mongoose to interface with MongoDB
 mongoose = require 'mongoose'
