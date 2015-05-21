@@ -56,13 +56,13 @@ db.once 'open', ->
   (new Setting()).checkSettings().then (required_settings) ->
 
     should_scan = (setting.value for setting in required_settings when setting.name is 'scan')[0]
+    api_port = (setting.value for setting in required_settings when setting.name is 'api_port')[0]
     should_remind = (setting.value for setting in required_settings when setting.name is 'remind')[0]
-    socket_port = (setting.value for setting in required_settings when setting.name is 'socket_port')[0]
     should_pushover = (setting.value for setting in required_settings when setting.name is 'should_pushover')[0]
 
     # use socket.io to send & recieve notifications to & from dashboard (via the API)
     socket_uri = process.env.SOCKET_IO_URI or '//localhost'
-    socket = require('socket.io-client')("#{socket_uri}:#{socket_port}")
+    socket = require('socket.io-client')("#{socket_uri}:#{api_port}")
 
     reddit.setupOAuth2 auth.reddit.app.id, auth.reddit.app.secret
     reddit.auth { username: auth.reddit.username, password: auth.reddit.password }, (error, response) ->

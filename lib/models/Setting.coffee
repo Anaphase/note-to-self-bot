@@ -40,18 +40,10 @@ schema.methods.checkSettings = ->
   ,
     name: 'api_port'
     value:
-      value: process.env.PORT or 6969
+      value: process.env.PORT or 8080
       name: 'api_port'
       type: 'number'
       label: 'API Port'
-      read_only: yes
-  ,
-    name: 'socket_port'
-    value:
-      value: process.env.PORT or 6969
-      name: 'socket_port'
-      type: 'number'
-      label: 'Socket Port'
       read_only: yes
   ]
 
