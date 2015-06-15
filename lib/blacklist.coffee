@@ -42,4 +42,7 @@ module.exports =
     'wtf'
     'gifs'
     'newzealand'
+    'travel'
+    'beer'
+    'personalfinance'
   ]
