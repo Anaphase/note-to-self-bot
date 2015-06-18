@@ -45,4 +45,9 @@ module.exports =
     'travel'
     'beer'
     'personalfinance'
+    'subredditsimulator'
+    'news'
+    'confession'
+    'gaming'
+    'woahdude'
   ]
