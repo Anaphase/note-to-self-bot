@@ -51,4 +51,5 @@ module.exports =
     'gaming'
     'woahdude'
     'abcdesis'
+    'cardinals'
   ]
