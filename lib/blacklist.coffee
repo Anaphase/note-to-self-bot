@@ -52,4 +52,5 @@ module.exports =
     'woahdude'
     'abcdesis'
     'cardinals'
+    'adviceanimals'
   ]
