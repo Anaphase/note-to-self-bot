@@ -53,4 +53,5 @@ module.exports =
     'abcdesis'
     'cardinals'
     'adviceanimals'
+    'mylittlehouseoffun'
   ]
