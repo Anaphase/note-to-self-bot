@@ -55,4 +55,7 @@ module.exports =
     'adviceanimals'
     'mylittlehouseoffun'
     'cfbofftopic'
+    'ynab'
+    'showerthoughts'
+    'facepalm'
   ]
