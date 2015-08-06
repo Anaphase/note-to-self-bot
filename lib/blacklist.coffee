@@ -58,4 +58,5 @@ module.exports =
     'ynab'
     'showerthoughts'
     'facepalm'
+    'supermoto'
   ]
