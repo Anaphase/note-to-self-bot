@@ -59,4 +59,5 @@ module.exports =
     'showerthoughts'
     'facepalm'
     'supermoto'
+    'horror'
   ]
