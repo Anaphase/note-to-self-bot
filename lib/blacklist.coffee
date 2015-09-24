@@ -61,4 +61,5 @@ module.exports =
     'supermoto'
     'horror'
     'diesel'
+    'parenting'
   ]
