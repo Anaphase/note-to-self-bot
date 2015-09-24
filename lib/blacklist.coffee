@@ -60,4 +60,5 @@ module.exports =
     'facepalm'
     'supermoto'
     'horror'
+    'diesel'
   ]
