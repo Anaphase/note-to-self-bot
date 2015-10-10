@@ -62,4 +62,5 @@ module.exports =
     'horror'
     'diesel'
     'parenting'
+    'breakingmom'
   ]
