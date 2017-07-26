@@ -63,4 +63,5 @@ module.exports =
     'diesel'
     'parenting'
     'breakingmom'
+    'unresolvedmysteries'
   ]
