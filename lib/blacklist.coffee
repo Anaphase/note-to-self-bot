@@ -64,4 +64,6 @@ module.exports =
     'parenting'
     'breakingmom'
     'unresolvedmysteries'
+    'asianbeautyadvice'
+    'elitedangerous'
   ]
