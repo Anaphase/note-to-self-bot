@@ -66,4 +66,5 @@ module.exports =
     'unresolvedmysteries'
     'asianbeautyadvice'
     'elitedangerous'
+    'patientgamers'
   ]
