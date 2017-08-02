@@ -67,4 +67,5 @@ module.exports =
     'asianbeautyadvice'
     'elitedangerous'
     'patientgamers'
+    'squaredcircle'
   ]
