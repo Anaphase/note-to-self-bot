@@ -68,4 +68,5 @@ module.exports =
     'elitedangerous'
     'patientgamers'
     'squaredcircle'
+    'rabbits'
   ]
