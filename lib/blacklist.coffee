@@ -69,4 +69,5 @@ module.exports =
     'patientgamers'
     'squaredcircle'
     'rabbits'
+    'cars'
   ]
