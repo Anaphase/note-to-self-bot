@@ -70,4 +70,7 @@ module.exports =
     'squaredcircle'
     'rabbits'
     'cars'
+    'food'
+    'television'
+    'sweden'
   ]
