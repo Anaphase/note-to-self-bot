@@ -6,6 +6,7 @@ module.exports =
     'doggie015'
     'Thunder_strike'
     'crushdepth5thFaction'
+    'Zednerfa'
   ]
   subreddits: [
     'fatpeoplehate'
