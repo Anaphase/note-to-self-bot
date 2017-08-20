@@ -73,4 +73,9 @@ module.exports =
     'food'
     'television'
     'sweden'
+    'diy'
+    'thenetherlands'
+    'spaceengineers'
+    'medicine'
+    'wayfarerspub'
   ]
