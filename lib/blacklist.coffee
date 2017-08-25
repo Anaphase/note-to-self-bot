@@ -79,4 +79,6 @@ module.exports =
     'spaceengineers'
     'medicine'
     'wayfarerspub'
+    'dragonage'
+    'worldbuilding'
   ]
