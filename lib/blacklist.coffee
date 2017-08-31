@@ -81,4 +81,6 @@ module.exports =
     'wayfarerspub'
     'dragonage'
     'worldbuilding'
+    'datingoverthirty'
+    'vive'
   ]
