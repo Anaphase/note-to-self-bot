@@ -83,4 +83,6 @@ module.exports =
     'worldbuilding'
     'datingoverthirty'
     'vive'
+    'jokes'
+    'sanfrancisco'
   ]
