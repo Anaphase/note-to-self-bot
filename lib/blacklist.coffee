@@ -85,4 +85,6 @@ module.exports =
     'vive'
     'jokes'
     'sanfrancisco'
+    'music'
+    'gwent'
   ]
