@@ -87,4 +87,5 @@ module.exports =
     'sanfrancisco'
     'music'
     'gwent'
+    'overlanding'
   ]
