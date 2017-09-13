@@ -7,6 +7,7 @@ module.exports =
     'Thunder_strike'
     'crushdepth5thFaction'
     'Zednerfa'
+    'SCREW-IT'
   ]
   subreddits: [
     'fatpeoplehate'
@@ -88,4 +89,5 @@ module.exports =
     'music'
     'gwent'
     'overlanding'
+    'texans'
   ]
