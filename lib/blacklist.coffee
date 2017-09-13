@@ -9,6 +9,7 @@ module.exports =
     'Zednerfa'
     'SCREW-IT'
     'qweltor'
+    'jepyang'
   ]
   subreddits: [
     'fatpeoplehate'
