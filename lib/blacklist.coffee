@@ -8,6 +8,7 @@ module.exports =
     'crushdepth5thFaction'
     'Zednerfa'
     'SCREW-IT'
+    'qweltor'
   ]
   subreddits: [
     'fatpeoplehate'
