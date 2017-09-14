@@ -92,4 +92,5 @@ module.exports =
     'gwent'
     'overlanding'
     'texans'
+    'ccw'
   ]
