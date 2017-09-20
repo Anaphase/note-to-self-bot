@@ -94,4 +94,6 @@ module.exports =
     'texans'
     'ccw'
     'astros'
+    'jobs'
+    'pathfinder_rpg'
   ]
