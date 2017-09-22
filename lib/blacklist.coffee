@@ -96,4 +96,5 @@ module.exports =
     'astros'
     'jobs'
     'pathfinder_rpg'
+    'charlotte'
   ]
