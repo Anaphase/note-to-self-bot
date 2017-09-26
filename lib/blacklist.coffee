@@ -99,4 +99,5 @@ module.exports =
     'charlotte'
     'seattlewa'
     'youtubehaiku'
+    'philippines'
   ]
