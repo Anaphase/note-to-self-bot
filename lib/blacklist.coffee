@@ -97,4 +97,6 @@ module.exports =
     'jobs'
     'pathfinder_rpg'
     'charlotte'
+    'seattlewa'
+    'youtubehaiku'
   ]
