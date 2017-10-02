@@ -101,4 +101,8 @@ module.exports =
     'youtubehaiku'
     'philippines'
     'popheads'
+    'minecraft'
+    'dataisbeautiful'
+    'darkmatter'
+    'funny'
   ]
