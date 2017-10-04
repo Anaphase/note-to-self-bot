@@ -10,6 +10,7 @@ module.exports =
     'SCREW-IT'
     'qweltor'
     'jepyang'
+    'KngFalcon'
   ]
   subreddits: [
     'fatpeoplehate'
@@ -105,4 +106,6 @@ module.exports =
     'dataisbeautiful'
     'darkmatter'
     'funny'
+    'naruto'
+    'learnjapanese'
   ]
