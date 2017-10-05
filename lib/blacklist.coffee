@@ -108,4 +108,7 @@ module.exports =
     'funny'
     'naruto'
     'learnjapanese'
+    'thaltar'
+    'greenday'
+    'belgium'
   ]
