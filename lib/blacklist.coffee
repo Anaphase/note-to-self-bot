@@ -111,4 +111,5 @@ module.exports =
     'thaltar'
     'greenday'
     'belgium'
+    'sysadmin'
   ]
