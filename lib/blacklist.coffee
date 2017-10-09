@@ -112,4 +112,7 @@ module.exports =
     'greenday'
     'belgium'
     'sysadmin'
+    'twoxchromosomes'
+    'writingprompts'
+    'googlepixel'
   ]
