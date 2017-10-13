@@ -115,4 +115,5 @@ module.exports =
     'twoxchromosomes'
     'writingprompts'
     'googlepixel'
+    'spacex'
   ]
