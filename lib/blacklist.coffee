@@ -116,4 +116,6 @@ module.exports =
     'writingprompts'
     'googlepixel'
     'spacex'
+    'korea'
+    'netflix'
   ]
