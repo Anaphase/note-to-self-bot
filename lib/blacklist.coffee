@@ -118,4 +118,5 @@ module.exports =
     'spacex'
     'korea'
     'netflix'
+    'askeurope'
   ]
