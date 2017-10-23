@@ -120,4 +120,5 @@ module.exports =
     'netflix'
     'askeurope'
     'almosthomeless'
+    'thelastofus'
   ]
