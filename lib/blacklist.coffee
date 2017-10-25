@@ -121,4 +121,5 @@ module.exports =
     'askeurope'
     'almosthomeless'
     'thelastofus'
+    'RWBY'
   ]
