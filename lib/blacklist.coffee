@@ -121,5 +121,6 @@ module.exports =
     'askeurope'
     'almosthomeless'
     'thelastofus'
-    'RWBY'
+    'rwby'
+    'random_acts_of_amazon'
   ]
