@@ -124,4 +124,5 @@ module.exports =
     'rwby'
     'random_acts_of_amazon'
     'answers'
+    'trackers'
   ]
