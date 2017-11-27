@@ -11,6 +11,7 @@ module.exports =
     'qweltor'
     'jepyang'
     'KngFalcon'
+    'friendly-bot'
   ]
   subreddits: [
     'fatpeoplehate'
