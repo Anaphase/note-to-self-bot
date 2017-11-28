@@ -128,4 +128,5 @@ module.exports =
     'trackers'
     'denmark'
     'unlikely_coraline'
+    'cpp'
   ]
