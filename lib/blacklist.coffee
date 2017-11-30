@@ -129,4 +129,5 @@ module.exports =
     'denmark'
     'unlikely_coraline'
     'cpp'
+    'neoliberal'
   ]
