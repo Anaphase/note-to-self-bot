@@ -130,4 +130,5 @@ module.exports =
     'unlikely_coraline'
     'cpp'
     'neoliberal'
+    'rockets'
   ]
