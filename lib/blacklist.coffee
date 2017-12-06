@@ -131,4 +131,5 @@ module.exports =
     'cpp'
     'neoliberal'
     'rockets'
+    'splatoon'
   ]
