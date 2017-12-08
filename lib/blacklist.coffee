@@ -132,4 +132,5 @@ module.exports =
     'neoliberal'
     'rockets'
     'splatoon'
+    'onepunchman'
   ]
