@@ -133,4 +133,6 @@ module.exports =
     'rockets'
     'splatoon'
     'onepunchman'
+    'politicaldiscussion'
+    'castiron'
   ]
