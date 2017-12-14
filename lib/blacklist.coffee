@@ -12,6 +12,7 @@ module.exports =
     'jepyang'
     'KngFalcon'
     'friendly-bot'
+    'potatoeWoW'
   ]
   subreddits: [
     'fatpeoplehate'
@@ -136,4 +137,5 @@ module.exports =
     'politicaldiscussion'
     'castiron'
     'california'
+    'chapotraphouse'
   ]
