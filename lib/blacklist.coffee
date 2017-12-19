@@ -138,4 +138,5 @@ module.exports =
     'castiron'
     'california'
     'chapotraphouse'
+    'linguistics'
   ]
