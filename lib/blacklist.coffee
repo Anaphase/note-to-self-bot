@@ -139,4 +139,6 @@ module.exports =
     'california'
     'chapotraphouse'
     'linguistics'
+    'australia'
+    'NASCAR'
   ]
