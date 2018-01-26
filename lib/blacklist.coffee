@@ -141,4 +141,6 @@ module.exports =
     'linguistics'
     'australia'
     'NASCAR'
+    'thewallstreet'
+    'creepyasterisks'
   ]
