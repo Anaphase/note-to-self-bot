@@ -143,4 +143,6 @@ module.exports =
     'NASCAR'
     'thewallstreet'
     'creepyasterisks'
+    'nfl'
+    'baseball'
   ]
