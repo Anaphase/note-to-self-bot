@@ -145,4 +145,6 @@ module.exports =
     'creepyasterisks'
     'nfl'
     'baseball'
+    'RPGStuck'
+    'RPGStuck_C3'
   ]
