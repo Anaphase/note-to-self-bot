@@ -147,4 +147,5 @@ module.exports =
     'baseball'
     'RPGStuck'
     'RPGStuck_C3'
+    'intj'
   ]
