@@ -13,6 +13,8 @@ module.exports =
     'KngFalcon'
     'friendly-bot'
     'potatoeWoW'
+    'spaceshipwanker'
+    'TechnicolorTraveler'
   ]
   subreddits: [
     'fatpeoplehate'
